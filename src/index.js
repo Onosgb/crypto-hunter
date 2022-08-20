@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import CryptoContext from "./app/context/CryptoContext";
 import App from "./App";
 import "./index.css";
-import "react-alice-carousel/lib/alice-carousel.css";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

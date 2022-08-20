@@ -6,6 +6,11 @@ const CryptoContext = ({ children }) => {
   const [currency, setCurrency] = useState("INR");
   const [symbol, setSymbol] = useState("₹");
 
+  const numberWithCommas = (x) => {
+    x = x.toFixed(2);
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   useEffect(() => {
     if (currency === "INR") setSymbol("₹");
     else if (currency === "USD") setSymbol("$");
@@ -13,7 +18,9 @@ const CryptoContext = ({ children }) => {
   }, [currency]);
 
   return (
-    <Crypto.Provider value={{ currency, symbol, setCurrency }}>
+    <Crypto.Provider
+      value={{ currency, symbol, setCurrency, numberWithCommas }}
+    >
       {children}
     </Crypto.Provider>
   );

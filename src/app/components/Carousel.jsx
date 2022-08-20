@@ -45,7 +45,7 @@ const Carousel = () => {
 
   const [trending, setTrending] = useState([]);
 
-  const { currency, symbol } = CryptoState();
+  const { currency, symbol, numberWithCommas } = CryptoState();
 
   const fetchTrendingCoins = async () => {
     try {
@@ -54,10 +54,6 @@ const Carousel = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   useEffect(() => {
@@ -82,7 +78,7 @@ const Carousel = () => {
         </ProfitContainer>
         <br />
         <span className={classes.currenctPrice}>
-          {symbol} {numberWithCommas(coin?.current_price.toFixed(2))}
+          {symbol} {numberWithCommas(coin?.current_price)}
         </span>
       </Link>
     );

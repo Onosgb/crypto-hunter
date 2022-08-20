@@ -4,7 +4,7 @@ import Header from "./app/components/Header";
 import Homepage from "./app/pages/Homepage";
 import Coinpage from "./app/pages/Coinpage";
 import { makeStyles } from "@mui/styles";
-
+import "react-alice-carousel/lib/alice-carousel.css";
 const useStyles = makeStyles({
   App: {
     backgroundColor: "#141618",

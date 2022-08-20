@@ -37,6 +37,7 @@ const Header = () => {
     },
   });
 
+  console.log(currency);
   return (
     <ThemeProvider theme={darkTheme}>
       <Box sx={{ flexGrow: 1 }}>
