@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     backgroundColor: "#141618",
     color: "#fff",
     minWeight: "100vh",
+    fontFamily: "Montserrat",
   },
 });
 

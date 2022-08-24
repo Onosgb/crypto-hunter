@@ -14,9 +14,10 @@ import {
 
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
-import { ThemeProvider, createTheme, useTheme } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { CoinList } from "../config/api";
 import { CryptoState } from "../context/CryptoContext";
@@ -49,7 +50,7 @@ const CoinsTable = () => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const { currency, numberWithCommas, symbol } = CryptoState();
-
+  const navigate = useNavigate();
   const fectCoins = async () => {
     setLoading(true);
 
@@ -128,7 +129,13 @@ const CoinsTable = () => {
                     const profit = row.price_change_percentage_24h > 0;
 
                     return (
-                      <TableRow className={classes.row} key={row.id}>
+                      <TableRow
+                        className={classes.row}
+                        key={row.id}
+                        onClick={() => {
+                          navigate(`/coins/${row.id}`);
+                        }}
+                      >
                         <TableCell
                           component="th"
                           scope="row"
