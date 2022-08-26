@@ -14,6 +14,9 @@ const Button = styled.span`
   }
   width: 22%;
   margin: 5px;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 const SelectButton = ({ children, seleted, onClick }) => {
   return <Button onClick={onClick}>{children}</Button>;

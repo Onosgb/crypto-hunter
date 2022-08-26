@@ -9,7 +9,7 @@ import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CryptoState } from "../context/CryptoContext";
-
+import { HeaderTitle } from "./Component.styles";
 const usestyles = makeStyles({
   title: {
     flex: 1,
@@ -44,9 +44,7 @@ const Header = () => {
           <Container>
             <Toolbar>
               <Link to="/" className={classes.link}>
-                <Typography className={classes.title} variant="h3">
-                  Crypto Hunter
-                </Typography>
+                <HeaderTitle> Crypto Hunter</HeaderTitle>
               </Link>
 
               <Select

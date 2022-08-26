@@ -85,7 +85,7 @@ const Coinpage = () => {
       console.log(error.message);
     }
   };
-
+  // eslint-disable-next-line
   useEffect(() => {
     fetchCoin();
   }, [id]);

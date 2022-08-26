@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import styled from "styled-components";
 import { HistoricalChart } from "../config/api";
-
+import "chartjs-plugin-zoom";
 import { CryptoState } from "../context/CryptoContext";
 import { CircularProgress } from "@mui/material";
 import {
@@ -43,13 +43,16 @@ const Container = styled.div`
   @media only screen and (min-width: 600px) {
     width: 100%;
     margin-top: 0;
-    padding: 20px;
-    padding-top: 0;
+    padding: 5px 0;
   }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
+
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
   margin-top: 20;
   justify-content: space-around;
   width: 100%;
@@ -63,7 +66,7 @@ const CoinInfo = ({ coin }) => {
     const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
     setHistoricData(data?.prices);
   };
-
+  // eslint-disable-next-line
   useEffect(() => {
     fetchHistoricData();
   }, [days, currency]);
@@ -105,6 +108,14 @@ const CoinInfo = ({ coin }) => {
           point: {
             radius: 1,
           },
+        },
+        zoom: {
+          enabled: true,
+          mode: "x",
+        },
+        pan: {
+          enabled: true,
+          mode: "x",
         },
       };
       return <Line options={options} data={data} />;

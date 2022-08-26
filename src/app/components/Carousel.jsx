@@ -5,7 +5,14 @@ import { TrendingCoins } from "../config/api";
 import { CryptoState } from "../context/CryptoContext";
 import AliceCarousel from "react-alice-carousel";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import {
+  CoinIcon,
+  Symbol,
+  ProfitContainer,
+  Profit,
+  CurrentPrice,
+} from "./Component.styles";
+
 const useStyles = makeStyles({
   carousel: {
     height: "50%",
@@ -20,25 +27,7 @@ const useStyles = makeStyles({
     textTransform: "uppercase",
     color: "white",
   },
-
-  currenctPrice: {
-    fontSize: 22,
-    fontWeight: 500,
-  },
 });
-
-const CoinIcon = styled.img`
-  width: 50px;
-  height: 50px;
-  margin-bottom: 10px;
-`;
-
-const Symbol = styled.span``;
-const ProfitContainer = styled.span``;
-
-const Profit = styled.span`
-  color: ${(props) => (props.profit > 0 ? "rgba(14, 203, 129)" : "red")};
-`;
 
 const Carousel = () => {
   const classes = useStyles();
@@ -55,7 +44,7 @@ const Carousel = () => {
       console.log(error);
     }
   };
-
+  // eslint-disable-next-line
   useEffect(() => {
     fetchTrendingCoins();
   }, [currency]);
@@ -68,7 +57,7 @@ const Carousel = () => {
         className={classes.carouselItem}
         to={`coins/${coin.id}`}
       >
-        <CoinIcon src={coin?.image} alt={coin.name} />
+        <CoinIcon src={coin?.image} alt={coin.name} max={80} />
         <ProfitContainer>
           <Symbol>{coin.symbol}</Symbol>
 
@@ -77,9 +66,9 @@ const Carousel = () => {
           </Profit>
         </ProfitContainer>
         <br />
-        <span className={classes.currenctPrice}>
+        <CurrentPrice>
           {symbol} {numberWithCommas(coin?.current_price)}
-        </span>
+        </CurrentPrice>
       </Link>
     );
   });

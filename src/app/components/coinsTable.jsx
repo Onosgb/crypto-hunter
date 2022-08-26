@@ -7,7 +7,6 @@ import {
   TableContainer,
   TableHead,
   TextField,
-  Typography,
   TableBody,
   Pagination,
 } from "@mui/material";
@@ -18,11 +17,25 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { CoinList } from "../config/api";
 import { CryptoState } from "../context/CryptoContext";
+import {
+  CoinIcon,
+  Symbol,
+  Profit,
+  CurrentPrice,
+  MarketCap,
+  TBHead,
+  TableTitle,
+} from "./Component.styles";
+
 const useStyles = makeStyles({
-  thRow: { color: "#000", fontWeight: 700, fontFamily: "Helvetica" },
+  thRow: {
+    color: "#000",
+    fontWeight: 700,
+    fontFamily: "Helvetica",
+    textAlign: "center",
+  },
   row: {
     backgroundColor: "#16171a",
     color: "#fff",
@@ -31,11 +44,9 @@ const useStyles = makeStyles({
     fontFamily: "MontSerrat",
   },
   detialContainer: { display: "flex", flexDirection: "column" },
-  symbol: { textTransform: "uppercase", fontSize: 12 },
+
   name: { color: "darkgrey" },
-  profit: {
-    fontWeight: 500,
-  },
+
   pagination: {
     padding: 20,
     width: "100%",
@@ -62,7 +73,7 @@ const CoinsTable = () => {
       setLoading(false);
     }
   };
-
+  // eslint-disable-next-line
   useEffect(() => {
     fectCoins();
   }, [currency]);
@@ -79,8 +90,8 @@ const CoinsTable = () => {
   const handleSearch = () => {
     return coins.filter(
       (coin) =>
-        coin.name.toLowerCase().includes(search) ||
-        coin.symbol.toLowerCase().includes(search)
+        coin.name.toLowerCase().includes(search?.toLowerCase()) ||
+        coin.symbol.toLowerCase().includes(search?.toLowerCase())
     );
   };
 
@@ -91,12 +102,7 @@ const CoinsTable = () => {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Container style={{ textAlign: "center" }}>
-        <Typography
-          variant="h4"
-          style={{ margin: 18, fontFamily: "Montserrat" }}
-        >
-          Cryptocurrency Prices by Market Cap
-        </Typography>
+        <TableTitle>Cryptocurrency Prices by Market Cap</TableTitle>
         <TextField
           label="Search for a Crypto Currency"
           variant="outlined"
@@ -112,12 +118,8 @@ const CoinsTable = () => {
               <TableHead style={{ backgroundColor: "#EEBC1D" }}>
                 <TableRow>
                   {["Coin", "Price", "24h Change", "Market Cap"].map((head) => (
-                    <TableCell
-                      className={classes.thRow}
-                      key={head}
-                      align={head === "Coin" ? "left" : "right"}
-                    >
-                      {head}
+                    <TableCell className={classes.thRow} key={head}>
+                      <TBHead head={head}>{head} </TBHead>
                     </TableCell>
                   ))}
                 </TableRow>
@@ -139,39 +141,37 @@ const CoinsTable = () => {
                         <TableCell
                           component="th"
                           scope="row"
-                          styles={{ display: "flex", gap: 15 }}
+                          styles={{ display: "flex", gap: 10 }}
                         >
-                          <img
+                          <CoinIcon
                             src={row?.image}
                             alt={row.name}
                             height="50"
                             style={{ marginBottom: 10 }}
                           />
                           <div className={classes.detialContainer}>
-                            <span className={classes.symbol}>{row.symbol}</span>
-                            <span className={classes.name}>{row.name}</span>
+                            <Symbol>{row.symbol}</Symbol>
+                            <Symbol>{row.name}</Symbol>
                           </div>
                         </TableCell>
                         <TableCell align="right">
-                          <span className={classes.symbol}>{symbol}</span>
-                          <span className={classes.price}>
+                          <Symbol>{symbol}</Symbol>
+                          <CurrentPrice>
                             {numberWithCommas(row.current_price)}
-                          </span>
-                        </TableCell>
-                        <TableCell
-                          align="right"
-                          className={classes.profit}
-                          style={{
-                            color: profit ? "rgba(14, 203, 129)" : "red",
-                          }}
-                        >
-                          {profit && "+"}
-                          {row.price_change_percentage_24h.toFixed(2)}%
+                          </CurrentPrice>
                         </TableCell>
                         <TableCell align="right">
-                          {numberWithCommas(row.market_cap)
-                            .toString()
-                            .slice(0, -6)}
+                          <Profit>
+                            {profit && "+"}
+                            {numberWithCommas(row.price_change_percentage_24h)}%
+                          </Profit>
+                        </TableCell>
+                        <TableCell align="right">
+                          <MarketCap>
+                            {numberWithCommas(row.market_cap)
+                              .toString()
+                              .slice(0, -6)}
+                          </MarketCap>
                         </TableCell>
                       </TableRow>
                     );

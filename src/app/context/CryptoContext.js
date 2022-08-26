@@ -11,6 +11,7 @@ const CryptoContext = ({ children }) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
+  // eslint-disable-next-line
   useEffect(() => {
     if (currency === "INR") setSymbol("₹");
     else if (currency === "USD") setSymbol("$");
