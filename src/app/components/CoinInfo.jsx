@@ -20,7 +20,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { chartDays } from "../config/data";
 import SelectButton from "./SelectButton";
-
+import { makeStyles } from "@mui/styles";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -31,6 +31,9 @@ ChartJS.register(
   Legend
 );
 
+const useStyles = makeStyles({
+  line: { width: "100vw" },
+});
 const Container = styled.div`
   width: 75%;
   display: flex;
@@ -41,7 +44,7 @@ const Container = styled.div`
   padding: 40px;
   // responsive
   @media only screen and (min-width: 600px) {
-    width: 100%;
+    width: 100vw;
     margin-top: 0;
     padding: 5px 0;
   }
@@ -50,14 +53,17 @@ const Container = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
 
-  @media only screen and (max-width: 600px) {
-    flex-direction: column;
-  }
   margin-top: 20;
   justify-content: space-around;
   width: 100%;
+  @media only screen and (max-width: 600px) {
+    width: 95vw;
+
+    flex-direction: column;
+  }
 `;
 const CoinInfo = ({ coin }) => {
+  const classes = useStyles();
   const [historicData, setHistoricData] = useState([]);
   const [days, setDays] = useState(1);
   const { currency } = CryptoState();
@@ -118,7 +124,7 @@ const CoinInfo = ({ coin }) => {
           mode: "x",
         },
       };
-      return <Line options={options} data={data} />;
+      return <Line options={options} data={data} className={classes.line} />;
     }
 
     return (

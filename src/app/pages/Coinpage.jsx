@@ -30,6 +30,7 @@ const Container = styled.div`
 
   @media only screen and (max-width: 460px) {
     flex-direction: column;
+    width: 100vw;
   }
 `;
 
