@@ -43,7 +43,7 @@ const Container = styled.div`
   margin-top: 25px;
   padding: 40px;
   // responsive
-  @media only screen and (min-width: 600px) {
+  @media only screen and (max-width: 600px) {
     width: 100vw;
     margin-top: 0;
     padding: 5px 0;

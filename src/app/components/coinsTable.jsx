@@ -124,7 +124,7 @@ const CoinsTable = () => {
                   ))}
                 </TableRow>
               </TableHead>
-              <TableBody>
+              {/* <TableBody>
                 {handleSearch()
                   .slice((page - 1) * 10, (page - 1) * 10 + 10)
                   .map((row) => {
@@ -176,7 +176,7 @@ const CoinsTable = () => {
                       </TableRow>
                     );
                   })}
-              </TableBody>
+              </TableBody> */}
             </Table>
           )}
         </TableContainer>
