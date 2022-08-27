@@ -1,4 +1,4 @@
-const CoinsTable = () => {
+const Coins = () => {
   return (
     <div>
       <span>Hello</span>
@@ -6,4 +6,4 @@ const CoinsTable = () => {
   );
 };
 
-export default CoinsTable;
+export default Coins;
