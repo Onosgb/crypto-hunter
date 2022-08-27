@@ -55,12 +55,12 @@ const ButtonContainer = styled.div`
 
   margin-top: 20;
   justify-content: space-around;
-  width: 100%;
   @media only screen and (max-width: 600px) {
     width: 95vw;
 
     flex-direction: column;
   }
+  width: 100%;
 `;
 const CoinInfo = ({ coin }) => {
   const classes = useStyles();
